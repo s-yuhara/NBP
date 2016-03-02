@@ -30,7 +30,7 @@ public class backingInput {
         this.name = name;
     }
 
-public String setvalue(){
+public String setValue(){
     handler.add(id,name);
     return null;
 }
