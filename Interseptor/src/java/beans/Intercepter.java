@@ -1,6 +1,7 @@
 package beans;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.interceptor.AroundConstruct;
@@ -18,12 +19,14 @@ public class Intercepter implements Serializable{
     
     @AroundConstruct
     public void ConstructorLog(InvocationContext ic) throws Exception{
+        Date now = new Date();
         logger.fine(
         new StringBuilder()
                 .append(lh.getConstructorName(ic))
                 .append("-->Constructor process start")
                 .append(":[Parameter]-->")
                 .append(lh.getParamList(ic))
+                .append(now)
                 .toString()
         );
         try{
@@ -33,6 +36,7 @@ public class Intercepter implements Serializable{
             new StringBuilder()
                     .append(lh.getConstructorName(ic))
                     .append("-->Exit")
+                    .append(now)
                     .toString()
             );
         }
@@ -40,13 +44,15 @@ public class Intercepter implements Serializable{
 
 @AroundInvoke
 public Object MethodLog(InvocationContext ic) throws Exception{
-logger.fine(
+        Date now = new Date();
+    logger.fine(
     new StringBuilder()
     .append(lh.getClassName(ic))
     .append(".")
     .append(lh.getMethodName(ic))
     .append("-->Process Start")
     .append(":[parameter]")
+    .append(now)
     .append(lh.getParamList(ic))
     .toString()
 );
